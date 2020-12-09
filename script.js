@@ -1,6 +1,6 @@
 let lastOperand = 0;
 let operation = null;
-const inputWindow = document.getElementById('inputWindow');
+var inputWindow =document.getElementById('inputWindow');
 //start
 document.addEventListener('click', function(){
     inputWindow.value -= '0';
@@ -38,22 +38,12 @@ document.getElementById('btn_9').addEventListener('click', function () {
 document.getElementById('btn_0').addEventListener('click', function () {
     inputWindow.value += '0';  
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+document.querySelector("#btn_point").addEventListener('click', function () {
+    if (inputWindow.value.includes('.') == false) {
+        console.log('log')
+        inputWindow.value += ".";
+    }
+})
 
 
 
@@ -71,6 +61,9 @@ if (operation=='mult'){
 if (operation=='mod'){
         inputWindow.value= lastOperand/parseInt(inputWindow.value);
      }
+if (operation=='minus'){
+        inputWindow.value= parseInt(inputWindow.value)*(-1);
+     }
 })
 
 
@@ -85,9 +78,16 @@ document.getElementById('btn_sum').addEventListener('click', function () {
     operation= 'sum';
 })
 document.getElementById('btn_dif').addEventListener('click', function () {
+    if (inputWindow.value=='0'){operation='minus';}
+    if (inputWindow.value!='0' && operation=='minus')
+    {
     lastOperand = parseInt(inputWindow.value);
     inputWindow.value = '';
-    operation= 'dif';
+    operation= 'dif';}
+    else{
+        lastOperand = parseInt(inputWindow.value);
+        inputWindow.value = '';
+        operation= 'dif';}
 })
 document.getElementById('btn_mult').addEventListener('click', function () {
     lastOperand = parseInt(inputWindow.value);
